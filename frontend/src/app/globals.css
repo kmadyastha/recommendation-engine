@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-background text-on-background antialiased;
+  font-feature-settings: "tnum";
+}
+
+.ai-gradient {
+  background: linear-gradient(135deg, #ff6b35 0%, #a884ff 100%);
+}
+
+.ai-gradient-text {
+  background: linear-gradient(to right, #a884ff, #ffb59d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ai-gradient-bg {
+  background: linear-gradient(
+    135deg,
+    rgba(168, 132, 255, 0.1) 0%,
+    rgba(255, 181, 157, 0.1) 100%
+  );
+}
+
+.ai-glow {
+  box-shadow: 0 0 40px -10px rgba(255, 107, 53, 0.4);
+}
+
+.glass-panel {
+  background: rgba(27, 27, 29, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(89, 65, 57, 0.2);
+}
+
+.input-inset {
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.ai-gradient-border {
+  position: relative;
+}
+
+.ai-gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to right, #a884ff, #ffb59d);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #1b1b1d 25%,
+    #2a2a2c 50%,
+    #1b1b1d 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

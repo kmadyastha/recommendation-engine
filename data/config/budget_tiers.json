@@ -1,0 +1,17 @@
+{
+  "low": {
+    "min": 0,
+    "max": 300,
+    "description": "Budget-friendly, up to ₹300 for two"
+  },
+  "medium": {
+    "min": 300,
+    "max": 600,
+    "description": "Mid-range, ₹300–₹600 for two (max inclusive)"
+  },
+  "high": {
+    "min": 600,
+    "max": null,
+    "description": "Premium, above ₹600 for two"
+  }
+}

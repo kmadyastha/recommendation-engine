@@ -1,0 +1,12 @@
+.venv/
+venv/
+.env
+.env.*
+data/raw/
+frontend/
+frontend/node_modules/
+.pytest_cache/
+.git/
+eval_runs/
+__pycache__/
+*.pyc

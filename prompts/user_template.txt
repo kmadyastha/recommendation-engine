@@ -1,0 +1,7 @@
+User preferences:
+{preferences_json}
+
+Return the top {limit} restaurant recommendations from the candidates below.
+
+Candidates (ONLY choose from this list):
+{candidates_json}

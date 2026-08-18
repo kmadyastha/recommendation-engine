@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BiteWise - Loading Recommendations</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#e5e1e4",
+                        "secondary-container": "#e3aa00",
+                        "on-tertiary-fixed": "#23005c",
+                        "tertiary-fixed": "#e9ddff",
+                        "surface-variant": "#353437",
+                        "surface-dim": "#131315",
+                        "surface-container-lowest": "#0e0e10",
+                        "on-secondary-container": "#5a4100",
+                        "surface-tint": "#ffb59d",
+                        "primary-fixed": "#ffdbd0",
+                        "primary-fixed-dim": "#ffb59d",
+                        "surface-container-highest": "#353437",
+                        "outline-variant": "#594139",
+                        "on-secondary": "#402d00",
+                        "secondary-fixed-dim": "#f9bd22",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#3c0091",
+                        "tertiary": "#d0bcff",
+                        "on-primary-fixed": "#390c00",
+                        "on-surface-variant": "#e1bfb5",
+                        "on-primary-container": "#5f1900",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-tertiary-fixed-variant": "#5516be",
+                        "surface-container": "#201f21",
+                        "on-background": "#e5e1e4",
+                        "secondary": "#ffc640",
+                        "on-primary": "#5d1900",
+                        "primary-container": "#ff6b35",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#3d0094",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#832600",
+                        "surface-container-low": "#1b1b1d",
+                        "primary": "#ffb59d",
+                        "on-secondary-fixed": "#261a00",
+                        "on-surface": "#e5e1e4",
+                        "secondary-fixed": "#ffdf9f",
+                        "tertiary-fixed-dim": "#d0bcff",
+                        "background": "#131315",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#a884ff",
+                        "surface-bright": "#39393b",
+                        "surface": "#131315",
+                        "outline": "#a98a80",
+                        "inverse-primary": "#ab3500",
+                        "inverse-on-surface": "#313032",
+                        "surface-container-high": "#2a2a2c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "lg": "32px",
+                        "sm": "16px",
+                        "md": "24px",
+                        "gutter": "16px",
+                        "xs": "8px",
+                        "base": "4px",
+                        "xl": "48px"
+                    },
+                    "fontFamily": {
+                        "rating-number": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "title-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "rating-number": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+            background-color: theme('colors.surface-container-high');
+        }
+        
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0,
+                rgba(255, 255, 255, 0.05) 20%,
+                rgba(255, 255, 255, 0.1) 60%,
+                rgba(255, 255, 255, 0)
+            );
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .ai-pulse {
+            animation: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 0.8;
+                box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+            }
+            50% {
+                opacity: 1;
+                box-shadow: 0 0 40px rgba(255, 107, 53, 0.5);
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary-container selection:text-white">
+<!-- Ambient Background -->
+<div class="fixed inset-0 z-0 pointer-events-none opacity-40">
+<div class="absolute inset-0 bg-gradient-to-b from-surface-dim to-background z-10"></div>
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px] animate-pulse" style="animation-duration: 8s;"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-tertiary/10 rounded-full blur-[120px] animate-pulse" style="animation-duration: 12s;"></div>
+</div>
+<!-- Top Navigation (Shell logic: Suppressed nav items for transactional/loading state) -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 dark:bg-surface-dim/70 backdrop-blur-md border-b border-outline-variant/10 shadow-sm flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20">
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg font-extrabold text-primary-container dark:text-primary">
+            BiteWise
+        </div>
+<!-- Right actions preserved but disabled for loading state -->
+<div class="flex items-center gap-sm">
+<button class="opacity-50 cursor-not-allowed p-2 rounded-full hover:bg-surface-variant transition-colors" disabled="">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+</button>
+<button class="opacity-50 cursor-not-allowed p-2 rounded-full hover:bg-surface-variant transition-colors" disabled="">
+<span class="material-symbols-outlined text-on-surface" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow z-10 pt-[120px] pb-xl px-margin-mobile md:px-margin-desktop max-w-[1280px] mx-auto w-full flex flex-col lg:flex-row gap-lg md:gap-xl">
+<!-- Left Column: Search Context (Disabled Form State) -->
+<div class="lg:w-1/3 flex flex-col gap-md sticky top-[120px] self-start opacity-60 pointer-events-none transition-opacity duration-500">
+<div class="bg-surface-container rounded-xl p-md border border-outline-variant/20 shadow-sm">
+<h2 class="font-title-md text-title-md text-on-surface mb-md">Your Criteria</h2>
+<div class="space-y-sm">
+<div class="flex flex-col gap-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Location</label>
+<div class="flex items-center bg-[#121217] border border-[#2A2A32] rounded-lg p-xs shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]">
+<span class="material-symbols-outlined text-on-surface-variant ml-xs mr-sm text-sm" data-icon="location_on">location_on</span>
+<span class="font-body-sm text-body-sm text-on-surface">Downtown, Seattle</span>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Vibe</label>
+<div class="flex flex-wrap gap-xs">
+<span class="px-sm py-1 bg-[#2A2A32] text-[#A1A1AA] rounded-full font-label-caps text-label-caps">Cozy</span>
+<span class="px-sm py-1 bg-[#2A2A32] text-[#A1A1AA] rounded-full font-label-caps text-label-caps">Date Night</span>
+</div>
+</div>
+<div class="flex flex-col gap-xs mt-sm pt-sm border-t border-[#2A2A32]">
+<button class="w-full bg-[#2A2A32] text-[#F5F5F7] border border-[#2A2A32] py-sm rounded-lg font-title-md text-title-md opacity-50 flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-lg" data-icon="sync">sync</span>
+                             Analyzing...
+                         </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Loading Skeletons & Message -->
+<div class="lg:w-2/3 flex flex-col gap-lg">
+<!-- Central Message -->
+<div class="flex flex-col items-center justify-center py-xl text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-high border border-outline-variant/30 flex items-center justify-center mb-md ai-pulse shadow-lg">
+<span class="material-symbols-outlined text-primary-container text-[32px]" data-icon="auto_awesome" data-weight="fill" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Finding the best spots for you...</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md mx-auto">Our AI is ranking restaurants based on your preferences.</p>
+</div>
+<!-- Skeleton Grid (Bento/Staggered Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md md:gap-lg">
+<!-- Skeleton Card 1 (Large) -->
+<div class="md:col-span-2 bg-[#1A1A1F] border border-[#2A2A32] rounded-xl overflow-hidden shadow-sm flex flex-col md:flex-row">
+<div class="w-full md:w-2/5 h-48 md:h-auto shimmer"></div>
+<div class="w-full md:w-3/5 p-md flex flex-col justify-between gap-md">
+<div>
+<div class="flex justify-between items-start mb-sm">
+<div class="w-3/4 h-6 rounded shimmer"></div>
+<div class="w-12 h-6 rounded shimmer"></div>
+</div>
+<div class="w-1/2 h-4 rounded shimmer mb-sm"></div>
+<div class="w-full h-12 rounded shimmer mt-md"></div>
+</div>
+<div class="flex gap-sm">
+<div class="w-16 h-6 rounded-full shimmer"></div>
+<div class="w-16 h-6 rounded-full shimmer"></div>
+<div class="w-16 h-6 rounded-full shimmer"></div>
+</div>
+</div>
+</div>
+<!-- Skeleton Card 2 (Standard) -->
+<div class="bg-[#1A1A1F] border border-[#2A2A32] rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="w-full h-40 shimmer"></div>
+<div class="p-md flex flex-col gap-sm flex-grow">
+<div class="flex justify-between items-start">
+<div class="w-2/3 h-5 rounded shimmer"></div>
+<div class="w-10 h-5 rounded shimmer"></div>
+</div>
+<div class="w-1/3 h-4 rounded shimmer"></div>
+<div class="w-full h-4 rounded shimmer mt-xs"></div>
+<div class="w-4/5 h-4 rounded shimmer"></div>
+<div class="mt-auto pt-sm flex gap-xs">
+<div class="w-14 h-5 rounded-full shimmer"></div>
+<div class="w-14 h-5 rounded-full shimmer"></div>
+</div>
+</div>
+</div>
+<!-- Skeleton Card 3 (Standard) -->
+<div class="bg-[#1A1A1F] border border-[#2A2A32] rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="w-full h-40 shimmer"></div>
+<div class="p-md flex flex-col gap-sm flex-grow">
+<div class="flex justify-between items-start">
+<div class="w-3/4 h-5 rounded shimmer"></div>
+<div class="w-10 h-5 rounded shimmer"></div>
+</div>
+<div class="w-2/5 h-4 rounded shimmer"></div>
+<div class="w-full h-4 rounded shimmer mt-xs"></div>
+<div class="w-3/4 h-4 rounded shimmer"></div>
+<div class="mt-auto pt-sm flex gap-xs">
+<div class="w-16 h-5 rounded-full shimmer"></div>
+<div class="w-12 h-5 rounded-full shimmer"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl border-t border-outline-variant/20 bg-surface-container-lowest dark:bg-surface-dim z-10 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-md max-w-[1280px] mx-auto w-full">
+<span class="font-label-caps text-label-caps text-on-surface">
+                © 2024 BiteWise AI. All systems operational.
+            </span>
+<div class="flex gap-md">
+<a class="font-body-sm text-body-sm text-secondary dark:text-secondary-fixed hover:text-secondary-container transition-colors" href="#">API Status</a>
+<a class="font-body-sm text-body-sm text-secondary dark:text-secondary-fixed hover:text-secondary-container transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-secondary dark:text-secondary-fixed hover:text-secondary-container transition-colors" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-secondary dark:text-secondary-fixed hover:text-secondary-container transition-colors" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>

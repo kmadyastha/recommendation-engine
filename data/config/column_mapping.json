@@ -1,0 +1,21 @@
+{
+  "source_columns": {
+    "id": ["id", "ID", "restaurant_id"],
+    "name": ["name", "Name", "Restaurant", "restaurant"],
+    "city": ["city", "City"],
+    "rating": ["rating", "Rating", "Avg ratings"],
+    "rating_count": ["rating_count", "rating_count", "Total ratings", "rating count"],
+    "cost": ["cost", "Cost", "cost for two", "Price", "cost_for_two"],
+    "cuisine": ["cuisine", "Cuisine", "Food type", "food types"]
+  },
+  "internal_fields": {
+    "id": "id",
+    "name": "name",
+    "city": "city",
+    "rating": "rating",
+    "rating_count": "rating_count",
+    "cost_for_two": "cost_for_two",
+    "cuisine": "cuisine",
+    "cuisines": "cuisines"
+  }
+}

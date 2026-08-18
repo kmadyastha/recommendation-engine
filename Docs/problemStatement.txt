@@ -1,0 +1,49 @@
+Problem Statement: AI-Powered Food Delivery Recommendation System (Swiggy Use Case)
+
+You are tasked with building an AI-powered restaurant recommendation service inspired by Swiggy. The system should intelligently suggest restaurants and dishes based on user preferences by combining structured data with a Large Language Model (LLM).
+
+Objective
+Design and implement an application that:
+- Takes user preferences (such as location, budget, cuisine, and ratings)
+- Uses a real-world dataset of restaurants
+- Leverages an LLM to generate personalized, human-like recommendations
+- Displays clear and useful results to the user
+
+System Workflow
+
+1. Data Ingestion
+   - Load and preprocess the Swiggy restaurants dataset from Kaggle (https://www.kaggle.com/datasets/ashishjangra27/swiggy-restaurants-dataset)
+   - Extract relevant fields such as restaurant name, location/city, cuisine, cost for two, rating, rating count
+
+2. User Input
+   - Collect user preferences:
+     - Location (e.g., Bangalore, Delhi)
+     - Budget (low, medium, high)
+     - Cuisine (e.g., North Indian, Chinese, South Indian)
+     - Minimum rating
+     - Any additional preferences (e.g., family-friendly, quick delivery)
+
+3. Integration Layer
+   - Filter and prepare relevant restaurant data based on user input
+   - Pass structured results into an LLM prompt
+   - Design a prompt that helps the LLM reason and rank options
+
+4. Recommendation Engine
+   - Use the LLM to:
+     - Rank restaurants
+     - Provide explanations (why each recommendation fits)
+     - Optionally summarize choices
+
+5. Output Display
+   - Present top recommendations in a user-friendly format:
+     - Restaurant Name
+     - Cuisine
+     - Rating
+     - Cost for Two
+     - Location/City
+     - Why Recommended (short LLM-generated explanation)
+
+Success Criteria
+- Recommendations are grounded in actual dataset values (no hallucinated restaurants)
+- Explanations are clear and specific to the user's stated preferences
+- End-to-end flow works: user input → filtered data → LLM reasoning → displayed results

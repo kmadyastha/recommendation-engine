@@ -1,0 +1,70 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  darkMode: "class",
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  theme: {
+    extend: {
+      colors: {
+        background: "#131315",
+        surface: "#131315",
+        "surface-dim": "#131315",
+        "surface-bright": "#39393b",
+        "surface-container-lowest": "#0e0e10",
+        "surface-container-low": "#1b1b1d",
+        "surface-container": "#201f21",
+        "surface-container-high": "#2a2a2c",
+        "surface-container-highest": "#353437",
+        "surface-variant": "#353437",
+        "on-background": "#e5e1e4",
+        "on-surface": "#e5e1e4",
+        "on-surface-variant": "#e1bfb5",
+        primary: "#ffb59d",
+        "on-primary": "#5d1900",
+        "primary-container": "#ff6b35",
+        "on-primary-container": "#5f1900",
+        secondary: "#ffc640",
+        "on-secondary": "#402d00",
+        "secondary-container": "#e3aa00",
+        "secondary-fixed": "#ffdf9f",
+        tertiary: "#d0bcff",
+        "tertiary-container": "#a884ff",
+        outline: "#a98a80",
+        "outline-variant": "#594139",
+        error: "#ffb4ab",
+        "error-container": "#93000a",
+      },
+      borderRadius: {
+        lg: "0.5rem",
+        xl: "0.75rem",
+      },
+      spacing: {
+        "margin-mobile": "20px",
+        "margin-desktop": "64px",
+        base: "4px",
+        xs: "8px",
+        sm: "16px",
+        md: "24px",
+        lg: "32px",
+        xl: "48px",
+        gutter: "16px",
+      },
+      fontSize: {
+        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "800" }],
+        "display-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "700" }],
+        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
+        "title-md": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+        "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+        "label-caps": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }],
+        "rating-number": ["18px", { lineHeight: "24px", fontWeight: "700" }],
+      },
+      fontFamily: {
+        sans: ["var(--font-plus-jakarta)", "system-ui", "sans-serif"],
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;
