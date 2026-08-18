@@ -12,6 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ ./src/
 COPY data/ ./data/
+COPY prompts/ ./prompts/
 
 ENV DATA_PATH=data/processed/restaurants.parquet
 ENV BUDGET_TIERS_PATH=data/config/budget_tiers.json
